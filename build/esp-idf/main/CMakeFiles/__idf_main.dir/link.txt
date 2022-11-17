@@ -1,0 +1,2 @@
+/home/fahad/esp/xtensa-lx106-elf/bin/xtensa-lx106-elf-ar qc libmain.a  CMakeFiles/__idf_main.dir/user_main.c.obj
+/home/fahad/esp/xtensa-lx106-elf/bin/xtensa-lx106-elf-ranlib libmain.a
