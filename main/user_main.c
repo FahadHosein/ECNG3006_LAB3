@@ -14,15 +14,16 @@
 #include "esp_log.h"
 #include "esp_system.h"
 
-#define GPIO_OUTPUT_IO      2   // LED
+#define GPIO_OUTPUT_IO  2   // LED
 
-#define LOW_PRIORITY    1
-#define MEDIUM_PRIORITY 2
-#define HIGH_PRIORITY   3
+#define QUANTUMN    2
 
 static const char *TAG = "main";
+static char buffer[2000];
 
 SemaphoreHandle_t xSemaphore;
+
+void vTaskGetRunTimeStats(char *pcWriteBuffer);
 
 static void gpio_wait()
 {
@@ -105,14 +106,16 @@ void app_main(void)
     io_conf.pull_up_en = 0;                          // disable pull-up mode
     gpio_config(&io_conf);                           // configure GPIO with the given settings
     xSemaphore = xSemaphoreCreateMutex();
+    xSemaphoreGive(xSemaphore);
 
-    if (xSemaphore != NULL)
-    {
-        xTaskCreate(gpio_on, "gpio_on_task", 2048, NULL, MEDIUM_PRIORITY, NULL);
-        xTaskCreate(gpio_off, "gpio_off_task", 2048, NULL, LOW_PRIORITY, NULL);
-    }
+    xTaskCreate(gpio_on, "gpio_on_task", 2048, NULL, QUANTUMN, NULL);
+    xTaskCreate(gpio_off, "gpio_off_task", 2048, NULL, QUANTUMN, NULL);
+    xTaskCreate(gpio_status, "gpio_status_task", 2048, NULL, QUANTUMN, NULL);
+    vTaskGetRunTimeStats(buffer);
 
-    xTaskCreate(gpio_status, "gpio_status_task", 2048, NULL, HIGH_PRIORITY, NULL);
+    printf("Task            Abs Time        Time\n");
+    printf("************************************\n");
+    printf(buffer, "\n");
     for (;;)
         ;
 }
