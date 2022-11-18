@@ -61,7 +61,7 @@ static void gpio_on(void *pvParameters)
         gpio_wait();
         xSemaphoreGive(xSemaphore);
         vTaskDelay(1000 / portTICK_PERIOD_MS);
-//        break;                                          //Break to allow for unit and integration test functions to run in "user_tests.h"
+        break;                                          //Break to allow for unit and integration test functions to run in "user_tests.h"
     }
 }
 
