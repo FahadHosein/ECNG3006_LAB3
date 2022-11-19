@@ -14,3 +14,6 @@ The test function firstly configures the GPIO pin, calls the "gpio_on" function.
 **Expected Output:** "gpio_get_level" returns a value of 0.
 
 **Output:** "gpio_get_level" returns a value of 0.
+
+### RISE Reflection
+For unit testing, my own structure was used as opposed to the Unity framework, as this allowed test functions to be custom-made to suit the units under test. For the unit test, the "gpio_on" function was tested, however, this was a void function and did not return any values. As a result, this made it more difficult to implement the Unity test framework. The test function instead made use of the "gpio_get_level" command, to determine whether the "gpio_on" function executed successfully. A simple boolean check was used along with a conditional statement to check if the GPIO level was either 1 or 0. Since these tests made use of the onboard LED on the ESP8266, a GPIO level of 0 indicates the LED is ON, and 1 indicates OFF. The Unity test framework can be implemented to test functions that return a value. For example, "esp_err_t" functions can be implemented and if successfully executed, the test functions can assert "ESP_OK".
