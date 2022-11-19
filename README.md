@@ -14,3 +14,6 @@ The test function configures the GPIO pin, following which a task is created for
 **Expected Output:** The LED on the ESP8266 will turn ON
 
 **Output:** The LED on the ESP8266 turned ON.
+
+### RISE Reflection
+For the verification test, additional equipment was not required. The verification test utilised the "xTaskCreate" command, instead of calling the function. To verify the system worked as intended, the LED was observed. On RESET, the LED remained ON, and only turned off when the system was either reset or powered off. This test can also be done using an external LED, however, it must be noted that for the external LED to be in an ON state, the value of the GPIO pin must be 1 instead of 0.
