@@ -14,3 +14,6 @@ The test function calls "gpio_main". Within "gpio_main", the GPIO pin is configu
 **Expected Output:** "gpio_get_level" returns a value of 0.
 
 **Output:** "gpio_get_level" returns a value of 0.
+
+### RISE Reflection
+For integration testing, a driver function was used to call the "gpio_on" function, which was previously unit-tested. The driver function, namely, "gpio_main" was used to configure the GPIO pin, following which, the function "gpio_on" was called. The test function for the integration test was similar to that of the test function for the unit test, with the difference being that the function called "gpio_main" instead of "gpio_on", and the GPIO configuration was removed from the test function and placed within "gpio_main". Following this, the same boolean check was used as that of the unit test function to determine whether the value of the GPIO pin was successfully changed. This can be improved by integrating additional functions such as "gpio_off" within the driver function to determine if the system functions as expected with multiple integrated units.
